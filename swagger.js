@@ -6,7 +6,7 @@ const doc={
         description: 'Collects and Displays Video Game Review Information'
     },
     host:'localhost:8000',
-    schemes: ['http']
+    schemes: ['http','https']
 };
 
 const outputFile = './swagger-output.json';
