@@ -5,7 +5,7 @@ const doc={
         title:'Game Review API',
         description: 'Collects and Displays Video Game Review Information'
     },
-    host:'localhost:8000',
+    host:'week5-8-30xe.onrender.com/',
     schemes: ['http','https']
 };
 
