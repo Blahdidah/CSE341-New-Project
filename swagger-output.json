@@ -8,7 +8,7 @@
   "host": "week5-8-30xe.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http","https"
+    "https"
   ],
   "paths": {
     "/reviews/": {
