@@ -43,25 +43,25 @@
               "type": "object",
               "properties": {
                 "author": {
-                  "example": "any"
+                  "example": "BGG"
                 },
                 "title": {
-                  "example": "any"
+                  "example": "Title of the game"
                 },
                 "musicR": {
-                  "example": "any"
+                  "example": "a rating out of 10"
                 },
                 "gameplayR": {
-                  "example": "any"
+                  "example": "a rating out of 10"
                 },
                 "storyR": {
-                  "example": "any"
+                  "example": "a rating out of 10"
                 },
                 "overallRating": {
-                  "example": "any"
+                  "example": "a rating out of 10"
                 },
                 "comments": {
-                  "example": "any"
+                  "example": "notes about the game"
                 }
               }
             }
@@ -113,29 +113,29 @@
               "type": "object",
               "properties": {
                 "author": {
-                  "example": "any"
+                  "example": "BGG"
                 },
                 "title": {
-                  "example": "any"
+                  "example": "Title of the game"
                 },
                 "musicR": {
-                  "example": "any"
+                  "example": "a rating out of 10"
                 },
                 "gameplayR": {
-                  "example": "any"
+                  "example": "a rating out of 10"
                 },
                 "storyR": {
-                  "example": "any"
+                  "example": "a rating out of 10"
                 },
                 "overallRating": {
-                  "example": "any"
+                  "example": "a rating out of 10"
                 },
                 "comments": {
-                  "example": "any"
-                }
+                  "example": "notes about the game"
               }
             }
           }
+        }
         ],
         "responses": {
           "204": {
