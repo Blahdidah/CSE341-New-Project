@@ -42,7 +42,39 @@ if (response.acknowledged){
 }else{
     res.status(500).json(response.error || 'An error occurred while inserting your review, please check the DB and try again.')
 }
+};
+//This contacts the DB and updates an entry using the id provided
+const updateReview = async(req, res)=>{
+    const userId = new ObjectId(req.params.id);
+    //review information
+    const review = {
+        author: req.body.author,
+        title: req.body.title,
+        musicR:req.body.musicR,
+        gameplayR:req.body.gameplayR,
+        storyR: req.body.storyR,
+        overallRating: req.body.overallRating,
+        comments: req.body.comments
+    };
+    const response = await mongodb.getDb().db('project2').collection('reviews').replaceOne({_id:userId}, review); 
+    console.log(response);
+    if(response.modifiedCount > 0){
+        res.status(204).send();
+    }else{
+        res.status(500).json(response.error||'An error occured while updating the review');
+    }
 }
-//we may create other things here later
+
+//this contacts the DB and deletes an entry using the id provided
+const deleteReview = async(req,res) =>{
+    const userId = new ObjectId(req.params.id);
+    const response = await mongodb.getDb().db('project2').collection('reviews').deleteOne({_id:userId}, true);
+    console.log(response);
+    if (response.deletedCount >0){
+        res.status(200).send();
+    }else{
+        res.status(500).json(response.error || 'An error occured while deleting the contact. Please check the Database.')
+    }
+};
 
 module.exports = {getAll, getOne, createReview};

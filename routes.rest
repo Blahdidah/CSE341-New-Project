@@ -1,0 +1,20 @@
+###get all reviews
+get http://localhost:8000/reviews
+### one specific review
+get http://localhost:8000/reviews/65243a69e0e3765c2e6ca981
+
+### create review
+POST http://localhost:8000/reviews http/1.1
+content-type: application/json
+
+{
+    "author":"BGG",
+    "title":"Little Hope",
+    "musicR":"8: While it does use a few generic audio ambient themes, they are done well and still have a lot of their own mood setting techniques that really draw the player it",
+    "gameplayR":"7: What they are trying to do - they do very well, but some might be disappointed by the lack of pure action gameplay",
+    "storyR":"8: Good well rounded characters, excellent themes and a variety of depth that always made you guess about the truth of the story",
+    "overallRating":"8/10",
+    "comments":"As a lover of the Dark Picture's Anthology games, I both love and dislike this game.  It's overall game and gameplay are right in line with the others, but at times it feels like your choices weren't choices at all.  Overall an absolutely amazing experience, but one that might require multiple plays"
+}
+###Live
+get http://localhost:8000/reviews
