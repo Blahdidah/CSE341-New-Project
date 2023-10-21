@@ -17,17 +17,42 @@ const getAll = async(req, res, next)=>{
 //this gets one entry based on ID
 const getOne = async (req, res, next)=>{
     const userId = new ObjectId(req.params.id);
-    const validhex = /[0-9A-Fa-f]{24}/
+    const result = await mongodb.getDb().db('project2').collection('reviews').findOne({_id:userId})
+    //.then((lists)=>{
+      //  res.setHeader('content-type','application/json');
+       // res.json(lists)});
+
+if(result==null){
+    res.setHeader('content-type','application/json');
+    res.status(400).send(`Entry ${userId} was not found, please check the userId and try again`);
+}
+else{
+        res.setHeader('content-type','application/json');
+        res.status(200).json(result);
+}}
+        //res.setHeader('content-type','application/json');
+        //res.json(lists[0])
+        //console.log(res.json(lists[0]))
+        
+        /*if(req.json(lists[0])==null){
+            res.status(400).send(`Entry ${userId} was not found, please check the userId and try again`);
+       // }else{
+      //  res.status(200);};
+        
+   // })
+//    catch(error){
+  //      res.status(400).send(`Entry ${userId} was not found, please check the userId and try again`);
+    }*/
     //first we want to make sure the ID is valid
-    if(validhex.test(userId)){
+    /*if(validhex.test(userId)){
         const result = await mongodb.getDb().db('project2').collection('reviews').find({_id: userId});
-                result.toArray().then((lists)=>{
-                res.setHeader('content-type','application/json');
-                res.status(200).json(lists[0]);})
-            }else{
+        result.toArray().then((lists)=>{
+        res.setHeader('content-type','application/json');
+        res.status(200).json(lists[0]);})
+        }else{
         res.status(400).send(`Entry ${userId} was not found, please check the userId and try again`);
-    }
-};
+    }*/
+//};
 
 //creating a review Needs some work,like a catch
 const createReview = async(req, res)=>{
