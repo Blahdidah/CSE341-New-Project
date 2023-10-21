@@ -5,6 +5,7 @@ const mongodb = require('./database/connect')
 const port = process.env.port;
 const app = express();
 
+
 app
     .use(bodyParser.json())
     .use((req,res,next) => {
@@ -19,7 +20,6 @@ mongodb.initDb((err, mongodb) =>{
     }else{
         app.listen(port);
         console.log(`connected to db and listening on ${port}`);
-        console.log('videogames ftw');
-        console.log('this will be awesome.')
+        console.log('Journey Before Destination');
     }
 });

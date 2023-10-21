@@ -1,6 +1,7 @@
-const { mongo } = require('mongoose');
+//const { mongo } = require('mongoose');
 const mongodb = require('../database/connect');
 const ObjectId = require('mongodb').ObjectId;
+
 
 //all of the reviews in the review database
 
@@ -9,21 +10,28 @@ const getAll = async(req, res, next)=>{
     result.toArray().then((lists)=>{
         res.setHeader('content-type','application/json');
         res.status(200).json(lists);
-    })
+    });
 };
+
 
 //this gets one entry based on ID
 const getOne = async (req, res, next)=>{
     const userId = new ObjectId(req.params.id);
-    const result = await mongodb.getDb().db('project2').collection('reviews').find({_id: userId});
-    result.toArray().then((lists)=>{
-        res.setHeader('content-type','application/json');
-        res.status(200).json(lists[0]);
-    })
+    const validhex = /[0-9A-Fa-f]{24}/
+    //first we want to make sure the ID is valid
+    if(validhex.test(userId)){
+        const result = await mongodb.getDb().db('project2').collection('reviews').find({_id: userId});
+                result.toArray().then((lists)=>{
+                res.setHeader('content-type','application/json');
+                res.status(200).json(lists[0]);})
+            }else{
+        res.status(400).send(`Entry ${userId} was not found, please check the userId and try again`);
+    }
 };
 
-//creating a review
+//creating a review Needs some work,like a catch
 const createReview = async(req, res)=>{
+
     //creating the review fields
     const review = {
         author: req.body.author,
@@ -41,7 +49,7 @@ if (response.acknowledged){
     res.status(201).json(response);
 }else{
     res.status(500).json(response.error || 'An error occurred while inserting your review, please check the DB and try again.')
-}
+    }
 };
 //This contacts the DB and updates an entry using the id provided
 const updateReview = async(req, res)=>{
@@ -68,12 +76,16 @@ const updateReview = async(req, res)=>{
 //this contacts the DB and deletes an entry using the id provided
 const deleteReview = async(req,res) =>{
     const userId = new ObjectId(req.params.id);
-    const response = await mongodb.getDb().db('project2').collection('reviews').deleteOne({_id:userId}, true);
-    console.log(response);
-    if (response.deletedCount >0){
-        res.status(200).send();
+    const validhex = /[0-9A-Fa-f]{24}/
+    if(validhex.test(userId)){
+        const response = await mongodb.getDb().db('project2').collection('reviews').deleteOne({_id:userId}, true);
+        if(response.deletedCount == 0){
+            res.status(500).json(response.error || 'The ID entered did not return a valid entry, please try again.')
+        }else{
+        res.status(200).send(`Entry ${userId} has been successfully deleted`);
+        }
     }else{
-        res.status(500).json(response.error || 'An error occured while deleting the contact. Please check the Database.')
+        res.status(500).json(Response.error || 'An error occured while deleting the contact. Please check the Database.')
     }
 };
 
