@@ -21,7 +21,7 @@ const validate = (req, res, next) => {
     }
         const extractedErrors =[]
         errors:errors.array().map(err => extractedErrors.push({ [err.path]: err.msg }))
-        return res.status(422).json({ errors:extractedErrors
+        return res.status(418).json({ errors:extractedErrors
         })
     }
 
