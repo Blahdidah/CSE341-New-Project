@@ -5,7 +5,7 @@ const loginController = require('../controllers/login.js');
 
 app.use(express.json());
 
-router.get('/', loginController.login);
+router.get('/', loginController.login, loginController.login);
 router.get('/dashboard', loginController.dashboard);
 //router.get('/login', (req,res)=>{
   //  res.send('login')});
