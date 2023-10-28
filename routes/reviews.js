@@ -22,5 +22,6 @@ router.put('/:id', reviewValidationRules(), validate, reviewsController.updateRe
 //this allows a review to be deleted
 router.delete('/:id', reviewsController.deleteReview);
 
+
 //this exports the routes
 module.exports = router;

@@ -1,0 +1,16 @@
+body{ 
+    background-color:rgb(147, 102, 190);
+    color:rgb(0, 0, 0);
+}
+#loginbox{
+    text-align:center;
+    margin: auto;
+    width:250px;
+    border: 5px;
+    border-style: outset;
+    border-color:black;
+    background-color:rgb(215, 146, 255)
+}
+#googleimg{
+    width:210px;
+}
