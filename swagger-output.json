@@ -13,7 +13,7 @@
   "paths": {
     "/": {
       "get": {
-        "description": "I'm honestly not sure about this one",
+        "description": "Returns the current authorization status",
         "responses": {
           "200": {
             "description": "OK"
@@ -50,6 +50,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401":{
+            "description": "User is not logged in"
           }
         }
       },
@@ -91,6 +94,9 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "User is not logged in"
+          },
           "418": {
             "description": "I'm a teapot"
           },
@@ -120,7 +126,11 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "User is not logged in"
           }
+
         }
       },
       "put": {
@@ -167,12 +177,16 @@
           "204": {
             "description": "No Content"
           },
+          "401": {
+            "description": "User is not logged in"
+          },
           "418": {
             "description": "I'm a teapot"
           },
           "500": {
             "description": "Internal Server Error"
           }
+          
         }
       },
       "delete": {
@@ -189,6 +203,9 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "User is not logged in"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -204,6 +221,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "User is not logged in"
           }
         }
       }
@@ -228,6 +248,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "User is not logged in"
           }
         }
       }

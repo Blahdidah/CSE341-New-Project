@@ -30,7 +30,6 @@ router.get('/', (req, res)=>{
     }
     else{
         res.send("You're logged out")
-        // this should display a bleh page
     }
 })
 //check if you're logged in or out, displays a status depending
