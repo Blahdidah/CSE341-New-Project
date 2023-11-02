@@ -13,7 +13,14 @@ const reviewValidationRules = () =>{
         body('comments').isLength({min:20}).withMessage('Say Less. Actually more, Min 20 characters')
     ]
 }
-
+const gameValidationRules =()=>{
+    return[
+        body('title').not().isEmpty().withMessage('The title cannot be empty'),
+        body('genre').not().isEmpty().withMessage('The genre must be included'),//could I make a pre-rendered list of acceptible genres?
+        body('platform').not().isEmpty().withMessage('The platform cannot be empty'),
+        body('releaseDate').not().isEmpty().withMessage('Date Must be formatted Month Day, Year')//research how to force date formatting
+    ]
+}
 const validate = (req, res, next) => {
     const errors = validationResult(req)
     if (errors.isEmpty()) {
@@ -29,4 +36,5 @@ const validate = (req, res, next) => {
 module.exports = {
     reviewValidationRules,
     validate,
+    gameValidationRules,
 }
