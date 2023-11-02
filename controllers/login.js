@@ -1,4 +1,4 @@
-const express = require('express');
+/*(const express = require('express');
 const path = require('path')
 const app = express();
 app.use(express.static("public"))
@@ -16,4 +16,4 @@ const dashboard = async(req,res)=>{
     res.send('dashboard')
 };
 
-module.exports ={login,loginCSS, dashboard}
+module.exports ={login,loginCSS, dashboard}*/

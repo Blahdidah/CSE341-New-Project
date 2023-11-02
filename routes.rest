@@ -1,5 +1,11 @@
 ###get all reviews
 get http://localhost:8000/reviews
+###login
+get http://localhost:8000/login
+###logout
+get http://localhost:8000/logout
+###callback
+get http://localhost:8000/callback
 ### one specific review
 get http://localhost:8000/reviews/65243a69e0e3765c2e6ca981
 
