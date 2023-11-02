@@ -10,7 +10,7 @@ dotenv.config;
 const config ={
     authRequired: false,
     auth0Logout: true,
-    secret: process.env.secret,
+    secret: process.env.configsecret,
     baseURL: process.env.baseURL,
     clientID: process.env.configClientId,
     issuerBaseURL: process.env.configIssuerBaseURL
