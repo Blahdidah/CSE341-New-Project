@@ -5,15 +5,36 @@
     "description": "Collects and Displays Video Game Review Information",
     "version": "1.0.0"
   },
-  "host": "week5-8-30xe.onrender.com",
+  "host": "week5-8-30xe.onrender.com/",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {
+    "/": {
+      "get": {
+        "description": "I'm honestly not sure about this one",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/checkLoginStatus": {
+      "get": {
+        "description": "Checks if User is logged in or out and returns status",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api-docs": {
       "get": {
-        "description": "",
+        "description": "Swagger API documentation",
         "responses": {
           "default": {
             "description": ""
@@ -23,7 +44,7 @@
     },
     "/reviews/": {
       "get": {
-        "description": "",
+        "description": "Returns all reviews in the db",
         "produces": [
           "application/json"
         ],
@@ -34,7 +55,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Add additional Game Review",
         "parameters": [
           {
             "name": "body",
@@ -43,25 +64,25 @@
               "type": "object",
               "properties": {
                 "author": {
-                  "example": "BGG"
+                  "example": "any"
                 },
                 "title": {
-                  "example": "Title of the game"
+                  "example": "any"
                 },
                 "musicR": {
-                  "example": "a rating out of 10"
+                  "example": "any"
                 },
                 "gameplayR": {
-                  "example": "a rating out of 10"
+                  "example": "any"
                 },
                 "storyR": {
-                  "example": "a rating out of 10"
+                  "example": "any"
                 },
                 "overallRating": {
-                  "example": "a rating out of 10"
+                  "example": "any"
                 },
                 "comments": {
-                  "example": "notes about the game"
+                  "example": "any"
                 }
               }
             }
@@ -71,6 +92,9 @@
           "201": {
             "description": "Created"
           },
+          "418": {
+            "description": "I'm a teapot"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -79,7 +103,7 @@
     },
     "/reviews/{id}": {
       "get": {
-        "description": "",
+        "description": "One game review retrieved by ID",
         "produces": [
           "application/json"
         ],
@@ -94,6 +118,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -113,33 +140,36 @@
               "type": "object",
               "properties": {
                 "author": {
-                  "example": "BGG"
+                  "example": "any"
                 },
                 "title": {
-                  "example": "Title of the game"
+                  "example": "any"
                 },
                 "musicR": {
-                  "example": "a rating out of 10"
+                  "example": "any"
                 },
                 "gameplayR": {
-                  "example": "a rating out of 10"
+                  "example": "any"
                 },
                 "storyR": {
-                  "example": "a rating out of 10"
+                  "example": "any"
                 },
                 "overallRating": {
-                  "example": "a rating out of 10"
+                  "example": "any"
                 },
                 "comments": {
-                  "example": "notes about the game"
+                  "example": "any"
+                }
               }
             }
           }
-        }
         ],
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "418": {
+            "description": "I'm a teapot"
           },
           "500": {
             "description": "Internal Server Error"
@@ -162,6 +192,43 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/games/": {
+      "get": {
+        "description": "All game Listings",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/games/{id}": {
+      "get": {
+        "description": "Game retrieved by Id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
