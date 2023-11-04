@@ -21,6 +21,32 @@
         }
       }
     },
+    "/login": {
+      "post": {
+        "description": "logs a user in",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "logs a user out",
+        "responses": {
+          "302": {
+            "description": "It's just what it does ok?"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/checkLoginStatus": {
       "get": {
         "description": "Checks if User is logged in or out and returns status",
