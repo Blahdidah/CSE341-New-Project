@@ -1,12 +1,11 @@
 //this file will have my endpoints
 const { auth, requiresAuth } = require('express-openid-connect');
-
+const {MongoClient} = require('mongodb');
 const express = require('express');
 const router = express.Router();
 const dotenv = require('dotenv');
 dotenv.config;
-
-
+//auth0 config
 const config ={
     authRequired: false,
     auth0Logout: true,
@@ -15,13 +14,32 @@ const config ={
     clientID: process.env.configClientId,
     issuerBaseURL: process.env.configIssuerBaseURL
     };
-
+//swagger route
 router.use('/', require('./swagger'));
-router.use(auth(config));
-
-router.post('/login', auth(config), (req, res)=>{
-    res.redirect('/');
+//login page
+router.get('/login', auth(config), (req, res)=>{
 })
+//logging in route
+router.post('/login', auth(config), async (req, res)=>{
+    const auth0User = req.oidc.user;
+    console.log('Auth0 User Object:', auth0User.email)
+    const client = new MongoClient(process.env.uri, {useUnifiedTopology:true});
+    try{
+        await client.connect();
+        const db = client.db('project2');
+        const usersCollection =db.collection('users');
+        const user = await usersCollection.findOne({ "email": auth0User.email})
+        if(!user){return res.status(401).send('User not authorized')}
+        res.redirect('/profile');}
+    catch (error){
+        console.error('Database Error:', error);
+        res.status(500).send('Database Error');
+    }finally{
+        await client.close();
+    }});
+
+
+//callback route
 router.get('/callback', (req, res)=>{
     res.send('callback page'); //figure out what this is I guess? and render a page or something)
 })
@@ -48,6 +66,12 @@ router.get('/checkLoginStatus',(req,res)=>{
     res.send(req.oidc.isAuthenticated()? 'Logged In':'Logged Out');
         
 });
-
+router.use((err,req, res, next)=>{
+    if(err.name === "UnauthorizedError"){
+        return res.status(401).send('Unauthorized');
+    }
+    console.error('Authentication error:', err);
+    res.status(500).send('Authentication error')
+});
 
 module.exports = router, requiresAuth;

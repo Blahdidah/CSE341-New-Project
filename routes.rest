@@ -25,11 +25,19 @@ content-type: application/json
 ###Live
 get http://localhost:8000/reviews
 
-### login
+### login success
 POST http://localhost:8000/login http/1.1
 content-type: application/json
 
 {
     "email":"test@test.com",
     "password":"P@ssw0rd!"
+}
+### login fail
+POST http://localhost:8000/login http/1.1
+content-type: application/json
+
+{
+    "email":"test@test.com",
+    "password":"ugh?"
 }
