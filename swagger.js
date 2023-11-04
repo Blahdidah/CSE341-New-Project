@@ -6,7 +6,7 @@ const doc={
         description: 'Collects and Displays Video Game Review Information'
     },
     host:'week5-8-30xe.onrender.com/',
-    schemes: ['http','https']
+    schemes: ['https']
 };
 
 const outputFile = './swagger-output.json';

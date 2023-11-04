@@ -22,44 +22,40 @@
       }
     },
     "/login": {
-      "post": {
-        "description": "logs a user in",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "test@test.com"
-                },
-                "password": {
-                  "example": "Some Password"
-                }
-              }
-            }
-          }
-        ],
+      "get": {
+        "description": "User login",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "failure"
           }
         }
       }
     },
     "/logout": {
       "get": {
-        "description": "logs a user out",
+        "description": "user logout",
         "responses": {
-          "302": {
-            "description": "It's just what it does ok?"
+          "200": {
+            "description": "Success"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Failure"
+          }
+        }
+      }
+    },
+    "/callback": {
+      "get": {
+        "description": "callback after authentication",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "failure"
           }
         }
       }
