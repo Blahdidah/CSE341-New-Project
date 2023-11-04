@@ -24,6 +24,26 @@
     "/login": {
       "post": {
         "description": "logs a user in",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "test@test.com"
+                },
+                "password": {
+                  "example": "Some Password"
+                },
+                "nickname": {
+                  "example": "dummy"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
