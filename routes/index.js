@@ -22,7 +22,6 @@ router.get('/login', auth(config), (req, res)=>{
 //logging in route
 router.post('/login', auth(config), async (req, res)=>{
     const auth0User = req.oidc.user;
-    console.log('Auth0 User Object:', auth0User.email)
     const client = new MongoClient(process.env.uri, {useUnifiedTopology:true});
     try{
         await client.connect();
