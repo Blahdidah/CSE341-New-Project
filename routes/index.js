@@ -1,6 +1,6 @@
 //this file will have my endpoints
 const { auth, requiresAuth } = require('express-openid-connect');
-//const app = express();
+
 const express = require('express');
 const router = express.Router();
 const dotenv = require('dotenv');
@@ -21,8 +21,11 @@ router.use('/', require('./swagger'));
 
 //to use Auth0 attaches /login /logout and /callback to the base URL on line below
 router.use(auth(config));
+
+//for reviews/games
 router.use('/reviews', requiresAuth(), require('./reviews'));
 router.use('/games', require('./games'));
+
 router.get('/', (req, res)=>{
     if (req.oidc.isAuthenticated()==true){
         res.send("you're logged in!")
