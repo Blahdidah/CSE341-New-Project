@@ -17,10 +17,18 @@ const config ={
     };
 
 router.use('/', require('./swagger'));
-
-
-//to use Auth0 attaches /login /logout and /callback to the base URL on line below
 router.use(auth(config));
+
+router.post('/login', auth(config), (req, res)=>{
+    res.redirect('/');
+})
+router.get('/callback', (req, res)=>{
+    res.send('callback page'); //figure out what this is I guess? and render a page or something)
+})
+router.get('/profile', requiresAuth(), (req,res)=>{
+    res.send('Profile Page'); //a profile page!
+})
+
 
 //for reviews/games
 router.use('/reviews', requiresAuth(), require('./reviews'));
