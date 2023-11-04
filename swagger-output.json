@@ -22,18 +22,39 @@
       }
     },
     "/login": {
-      "get": {
-        "description": "User login",
-        "responses": {
-          "200": {
-            "description": "success"
-          },
-          "400": {
-            "description": "failure"
+          "post": {
+            "summary": "User login",
+            "description": "Initiate the login process by sending credentials.",
+            "consumes": ["application/json"],
+            "parameters": [
+              {
+                "in": "body",
+                "name": "credentials",
+                "description": "User login credentials",
+                "required": true,
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Success"
+              },
+              "401": {
+                "description": "Unauthorized"
+              }
+            }
           }
-        }
-      }
-    },
+        },
     "/logout": {
       "get": {
         "description": "user logout",
