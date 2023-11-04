@@ -36,9 +36,6 @@
                 },
                 "password": {
                   "example": "Some Password"
-                },
-                "nickname": {
-                  "example": "dummy"
                 }
               }
             }
