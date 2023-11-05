@@ -30,7 +30,7 @@ const createGameEntry = async(req, res)=>{
         releaseDate: req.body.releaseDate,
     };
     //send to DB
-    const response = await mongo.getDb().db('project2').collection('games').insertOne(game);
+    const response = await mongodb.getDb().db('project2').collection('games').insertOne(game);
     //feedback from the review
     if (response.acknowledged){
         res.status(201).json(response);
