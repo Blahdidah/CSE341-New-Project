@@ -18,7 +18,7 @@ const gameValidationRules =()=>{
         body('title').not().isEmpty().withMessage('The title cannot be empty'),
         body('genre').not().isEmpty().withMessage('The genre must be included'),//could I make a pre-rendered list of acceptible genres?
         body('platform').not().isEmpty().withMessage('The platform cannot be empty'),
-        body('releaseDate').not().isEmpty().withMessage('Date Must be formatted Month Day, Year')//research how to force date formatting
+        body('releaseDate').not().isEmpty().withMessage('Date cannot be empty')//research how to force date formatting
     ]
 }
 const validate = (req, res, next) => {
