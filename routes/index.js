@@ -20,20 +20,26 @@ router.use('/', require('./swagger'));
 router.get('/login', auth(config), (req, res)=>{
 })
 //logging in route
-
+router.post('/login', auth(config), (req, res)=>{
+    if (!req.oidc.isAuthenticated()){
+        return res.oidc.login();
+    }
+    res.redirect('/profile')
+})
 //for reviews/games
 router.use('/reviews', requiresAuth(), require('./reviews'));
 router.use('/games', require('./games'));
-router.post('/login', auth(config), (req, res)=>{
-    res.send("you're logged in")
-})
 
 //callback route
 router.post('/callback', (req, res)=>{
     res.send('callback page'); //figure out what this is I guess? and render a page or something)
 })
 router.get('/profile', requiresAuth(), (req,res)=>{
-    res.send('Profile Page'); //a profile page!
+    if(req.oidc.isAuthenticated()){
+        res.send('Welcome user!');
+    }else{
+        res.redirect.apply('login')
+    }
 })
 router.get('/', (req, res)=>{
     if (req.oidc.isAuthenticated()==true){
