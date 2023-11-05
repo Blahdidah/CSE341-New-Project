@@ -20,6 +20,10 @@ router.use('/', require('./swagger'));
 router.get('/login', auth(config), (req, res)=>{
 })
 //logging in route
+
+//for reviews/games
+router.use('/reviews', requiresAuth(), require('./reviews'));
+router.use('/games', require('./games'));
 router.post('/login', auth(config), async (req, res)=>{
     const auth0User = req.oidc.user;
     const client = new MongoClient(process.env.uri, {useUnifiedTopology:true});
@@ -45,12 +49,6 @@ router.get('/callback', (req, res)=>{
 router.get('/profile', requiresAuth(), (req,res)=>{
     res.send('Profile Page'); //a profile page!
 })
-
-
-//for reviews/games
-router.use('/reviews', requiresAuth(), require('./reviews'));
-router.use('/games', require('./games'));
-
 router.get('/', (req, res)=>{
     if (req.oidc.isAuthenticated()==true){
         res.send("you're logged in!")

@@ -71,4 +71,4 @@ const deleteGame = async(req, res)=>{
     }
 }
 
-module.exports ={getAll, getOne, createGameEntry, updateGame};
+module.exports ={getAll, getOne, createGameEntry, updateGame, deleteGame};

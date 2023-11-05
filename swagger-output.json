@@ -5,15 +5,46 @@
     "description": "Collects and Displays Video Game Review Information",
     "version": "1.0.0"
   },
-  "host": "localhost:8000", 
+  "host": "week5-8-30xe.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
+    "/login": {
+      "get": {
+        "description": "serves a login page",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "Passes the login information for verification",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "test@test.com"
+                },
+                "password": {
+                  "example": "The user's password"
+                }}}}],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/": {
       "get": {
-        "description": "Returns the current authorization status",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -21,69 +52,9 @@
         }
       }
     },
-    "/login": {
-          "post": {
-            "summary": "User login",
-            "description": "Initiate the login process by sending credentials.",
-            "consumes": ["application/json"],
-            "parameters": [
-              {
-                "in": "body",
-                "name": "credentials",
-                "description": "User login credentials",
-                "required": true,
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "email": {
-                      "type": "string"
-                    },
-                    "password": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "Success"
-              },
-              "401": {
-                "description": "Unauthorized"
-              }
-            }
-          }
-        },
-    "/logout": {
-      "get": {
-        "description": "user logout",
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "Failure"
-          }
-        }
-      }
-    },
-    "/callback": {
-      "get": {
-        "description": "callback after authentication",
-        "responses": {
-          "200": {
-            "description": "success"
-          },
-          "400": {
-            "description": "failure"
-          }
-        }
-      }
-    },
     "/checkLoginStatus": {
       "get": {
-        "description": "Checks if User is logged in or out and returns status",
+        "description": "Checks a user's login status",
         "responses": {
           "200": {
             "description": "OK"
@@ -93,7 +64,7 @@
     },
     "/api-docs": {
       "get": {
-        "description": "Swagger API documentation",
+        "description": "API docs",
         "responses": {
           "default": {
             "description": ""
@@ -103,21 +74,18 @@
     },
     "/reviews/": {
       "get": {
-        "description": "Returns all reviews in the db",
+        "description": "gets all the reviews in the database",
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401":{
-            "description": "User is not logged in"
           }
         }
       },
       "post": {
-        "description": "Add additional Game Review",
+        "description": "Add a new Review",
         "parameters": [
           {
             "name": "body",
@@ -154,9 +122,6 @@
           "201": {
             "description": "Created"
           },
-          "401": {
-            "description": "User is not logged in"
-          },
           "418": {
             "description": "I'm a teapot"
           },
@@ -168,7 +133,7 @@
     },
     "/reviews/{id}": {
       "get": {
-        "description": "One game review retrieved by ID",
+        "description": "Retrieves review by Id",
         "produces": [
           "application/json"
         ],
@@ -186,15 +151,11 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "401": {
-            "description": "User is not logged in"
           }
-
         }
       },
       "put": {
-        "description": "",
+        "description": "Updates review by id",
         "parameters": [
           {
             "name": "id",
@@ -237,20 +198,16 @@
           "204": {
             "description": "No Content"
           },
-          "401": {
-            "description": "User is not logged in"
-          },
           "418": {
             "description": "I'm a teapot"
           },
           "500": {
             "description": "Internal Server Error"
           }
-          
         }
       },
       "delete": {
-        "description": "",
+        "description": "Deletes Review by Id",
         "parameters": [
           {
             "name": "id",
@@ -263,9 +220,6 @@
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "User is not logged in"
-          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -274,23 +228,54 @@
     },
     "/games/": {
       "get": {
-        "description": "All game Listings",
+        "description": "Games in the database",
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "genre": {
+                  "example": "any"
+                },
+                "platform": {
+                  "example": "any"
+                },
+                "releaseDate": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
           },
-          "401": {
-            "description": "User is not logged in"
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/games/{id}": {
       "get": {
-        "description": "Game retrieved by Id",
+        "description": "Retrieves one game by ID",
         "produces": [
           "application/json"
         ],
@@ -308,9 +293,65 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates one game review",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
-          "401": {
-            "description": "User is not logged in"
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "genre": {
+                  "example": "any"
+                },
+                "platform": {
+                  "example": "any"
+                },
+                "releaseDate": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes One game review",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

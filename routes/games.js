@@ -11,5 +11,7 @@ router.get('/', gamesController.getAll);
 //returns just one game per ID
 router.get('/:id', gamesController.getOne);
 //router.post('/',gameValidationRules(), gamesController.createGameEntry )
-
+router.post('/', gamesController.createGameEntry);
+router.put('/:id', gamesController.updateGame);
+router.delete('/:id', gamesController.deleteGame)
 module.exports=router;
