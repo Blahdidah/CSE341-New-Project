@@ -24,26 +24,11 @@ router.get('/login', auth(config), (req, res)=>{
 //for reviews/games
 router.use('/reviews', requiresAuth(), require('./reviews'));
 router.use('/games', require('./games'));
-router.post('/login', auth(config), async (req, res)=>{
-    const auth0User = req.oidc.user;
-    const client = new MongoClient(process.env.uri, {useUnifiedTopology:true});
-    try{
-        await client.connect();
-        const db = client.db('project2');
-        const usersCollection =db.collection('users');
-        const user = await usersCollection.findOne({ "email": auth0User.email})
-        if(!user){return res.status(401).send('User not authorized')}
-        res.redirect('/profile');}
-    catch (error){
-        console.error('Database Error:', error);
-        res.status(500).send('Database Error');
-    }finally{
-        await client.close();
-    }});
-
+router.post('/login', auth(config), (req, res)=>{
+})
 
 //callback route
-router.get('/callback', (req, res)=>{
+router.post('/callback', (req, res)=>{
     res.send('callback page'); //figure out what this is I guess? and render a page or something)
 })
 router.get('/profile', requiresAuth(), (req,res)=>{
