@@ -27,14 +27,14 @@ router.post('/login', auth(config), (req, res)=>{
     res.redirect('/profile')
 })
 //for reviews/games
-router.use('/reviews', requiresAuth(), require('./reviews'));
+router.use('/reviews', require('./reviews'));
 router.use('/games', require('./games'));
 
 //callback route
 router.post('/callback', (req, res)=>{
     res.send('callback page'); //figure out what this is I guess? and render a page or something)
 })
-router.get('/profile', requiresAuth(), (req,res)=>{
+router.get('/profile', (req,res)=>{
     if(req.oidc.isAuthenticated()){
         res.send('Welcome user!');
     }else{
