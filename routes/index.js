@@ -25,6 +25,7 @@ router.get('/login', auth(config), (req, res)=>{
 router.use('/reviews', requiresAuth(), require('./reviews'));
 router.use('/games', require('./games'));
 router.post('/login', auth(config), (req, res)=>{
+    res.send("you're logged in")
 })
 
 //callback route
