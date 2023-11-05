@@ -49,12 +49,12 @@ router.get('/checkLoginStatus',(req,res)=>{
     res.send(req.oidc.isAuthenticated()? 'Logged In':'Logged Out');
         
 });
-router.use((err,req, res, next)=>{
+/*router.use((err,req, res, next)=>{
     if(err.name === "UnauthorizedError"){
         return res.status(401).send('Unauthorized');
     }
     console.error('Authentication error:', err);
     res.status(500).send('Authentication error')
 });
-
+*/
 module.exports = router, requiresAuth;
